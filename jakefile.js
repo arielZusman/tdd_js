@@ -1,5 +1,9 @@
 /*global desc, task, jake, fail, complete */
-// /*jshint node: true */
+/* 	Notes:
+	- everything is wrapped in a function to overide jshint function hoisting 
+	- we use nodeLintOptions so maybe later we can but all options in a config file
+	  to keep the build script clean
+*/
 (function(){
 	
 	"use strict";
@@ -13,9 +17,8 @@
 		var files = new jake.FileList();
 		files.include("**/*.js");
 		files.exclude("node_modules");
-	// files.exclude("build");
-	
-	lint.validateFileList(files.toArray(), nodeLintOptions(), {});	
+		
+		lint.validateFileList(files.toArray(), nodeLintOptions(), {});	
 });
 
 	function nodeLintOptions () {
@@ -38,6 +41,6 @@
 		};
 		return options;
 	}
-	
+
 })();
 
