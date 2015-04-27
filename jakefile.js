@@ -8,6 +8,7 @@
 	
 	"use strict";
 
+	desc("build and test");
 	task("default", ["lint"]);
 
 	desc("Lint everything");
@@ -20,6 +21,11 @@
 		
 		lint.validateFileList(files.toArray(), nodeLintOptions(), {});	
 });
+
+	desc("Integrate");
+	task("integrate", ["default"], function(){
+		
+	});
 
 	function nodeLintOptions () {
 		var options = {
