@@ -1,16 +1,43 @@
-task("default", ["lint"]);
+/*global desc, task, jake, fail, complete */
+// /*jshint node: true */
+(function(){
+	
+	"use strict";
 
-desc("Lint everything");
-task("lint", [], function(){
-	var lint = require("./build/lint/lint_runner.js");
-	lint.validateFile("jakefile.js", {}, {});
+	task("default", ["lint"]);
+
+	desc("Lint everything");
+	task("lint", [], function(){
+		var lint = require("./build/lint/lint_runner.js");
+
+		var files = new jake.FileList();
+		files.include("**/*.js");
+		files.exclude("node_modules");
+	// files.exclude("build");
+	
+	lint.validateFileList(files.toArray(), nodeLintOptions(), {});	
 });
 
-desc("Example!");
-task("example", ["dependency"],function(){
-	console.log("example task");
-});
+	function nodeLintOptions () {
+		var options = {
+			bitwise: true,
+			curly: false,
+			eqeqeq: true,
+			forin: true,
+			immed: true,
+			latedef: true,
+			newcap: true,
+			noarg: true,
+			noempty: true,
+			nonew: true,
+			regexp: true,
+			undef: true,
+			strict: true,
+			trailing: true,
+			node: true
+		};
+		return options;
+	}
+	
+})();
 
-task("dependency", function(){
-	console.log("dependency");
-});
