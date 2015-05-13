@@ -9,7 +9,7 @@
 	"use strict";
 
 	desc("build and test");
-	task("default", ["lint"]);
+	task("default", ["lint", "test"]);
 
 	desc("Lint everything");
 	task("lint", [], function(){
@@ -20,6 +20,11 @@
 		files.exclude("node_modules");
 		var passed = lint.validateFileList(files.toArray(), nodeLintOptions(), {});
 		if ( !passed ) fail("Lint failed");
+	});
+
+	desc("Test everything");
+	task("test", [], function(){
+		console.log("test goes here");
 	});
 
 	desc("Integrate");
