@@ -26,9 +26,14 @@
 	task("test", [], function(){
 		console.log("test goes here");
 		var reporter = require('nodeunit').reporters.default;
-		reporter.run(['src/server/_server_test.js']);
-
-	});
+		reporter.run(['src/server/_server_test.js'], null, function(failures){
+			if (failures) fail("Test Failed");
+			complete();
+		});
+		// We had a problem that our tests run after the integration.
+		//This option tells Jake to wait for the complete() to finish before moving on 
+		// ↓
+	}, {async: true}); 
 
 	desc("Integrate");
 	task("integrate", ["default"], function(){
