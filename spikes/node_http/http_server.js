@@ -1,4 +1,5 @@
 /* Very simple node https server*/
+"use strict";
 var http = require('http');
 
 var server = http.createServer();
